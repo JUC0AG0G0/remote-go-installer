@@ -13,7 +13,6 @@ MAIN_URL="${SERVER}/main.go?key=${KEY}"
 echo "🔑 Clé = $KEY"
 echo "{\"key\": \"${KEY}\"}" > key.json
 
-# Installation de Go si manquant
 if ! command -v go &> /dev/null; then
   echo "⏬ Installation de Go..."
   curl -OL https://go.dev/dl/go1.21.5.linux-amd64.tar.gz
@@ -21,7 +20,6 @@ if ! command -v go &> /dev/null; then
   sudo tar -C /usr/local -xzf go1.21.5.linux-amd64.tar.gz
   rm go1.21.5.linux-amd64.tar.gz
 
-  # Ajouter Go au PATH dans les fichiers shell
   GO_PATH_LINE='export PATH=$PATH:/usr/local/go/bin'
   FILES_TO_UPDATE=("$HOME/.bashrc" "$HOME/.zshrc" "$HOME/.profile")
 
@@ -41,7 +39,6 @@ if ! command -v go &> /dev/null; then
     fi
   done
 
-  # Optionnel : ajout global si root
   if [ "$(id -u)" = "0" ] && [ -f /etc/profile ]; then
     if ! grep -q "/usr/local/go/bin" /etc/profile; then
       echo "$GO_PATH_LINE" >> /etc/profile
@@ -49,7 +46,6 @@ if ! command -v go &> /dev/null; then
     fi
   fi
 
-  # Appliquer le PATH dans ce shell
   export PATH=$PATH:/usr/local/go/bin
 fi
 

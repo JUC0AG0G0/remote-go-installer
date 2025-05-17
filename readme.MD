@@ -25,14 +25,14 @@ node server.js
 
 ### 2. Exécute l'installation en une seule commande :
 ```bash
-curl -sSL "http://localhost:7583/install.sh?key=12345" | bash
+sudo curl -sSL "http://localhost:7583/install.sh?key=12345" | bash
 ```
 
 ### 🔐 Clés d’accès
 Les clés valides sont définies côté serveur dans server.js :
 
 ```js
-const VALID_KEYS = ['12345', 'abcde', 'monclesecret'];
+const VALID_KEYS = ['12345', 'abcde', 'moncodesecret'];
 ```
 Si la clé est invalide ou absente, l’installation est refusée.
 

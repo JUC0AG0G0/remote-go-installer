@@ -5,10 +5,8 @@ const path = require('path');
 const app = express();
 const PORT = 7583;
 
-// Liste de clés valides
 const VALID_KEYS = ['12345', 'abcde', 'monclesecret'];
 
-// Middleware de vérification de clé
 function verifyKey(req, res, next) {
     const key = req.query.key;
     if (!VALID_KEYS.includes(key)) {
@@ -17,7 +15,6 @@ function verifyKey(req, res, next) {
     next();
 }
 
-// Route protégée pour install.sh
 app.get('/install.sh', verifyKey, (req, res) => {
     const filePath = path.join(__dirname, 'install.sh');
     const key = req.query.key;
@@ -33,7 +30,6 @@ app.get('/install.sh', verifyKey, (req, res) => {
 });
 
 
-// Route protégée pour main.go
 app.get('/main.go', verifyKey, (req, res) => {
     const filePath = path.join(__dirname, 'main.go');
     res.sendFile(filePath);
